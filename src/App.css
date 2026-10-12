@@ -254,3 +254,239 @@
     display: none;
   }
 }
+/* v0.8 Düzenleme modu */
+
+.edit-toolbar {
+  position: absolute;
+  z-index: 30;
+  top: 24px;
+  right: 72px;
+
+  display: flex;
+  gap: 8px;
+}
+
+.edit-toggle,
+.edit-export {
+  min-height: 42px;
+  padding: 10px 14px;
+  border: 1px solid #ddd6eb;
+  border-radius: 12px;
+  background: white;
+  color: #59418d;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.edit-toggle.active {
+  background: #7652c5;
+  border-color: #7652c5;
+  color: white;
+}
+
+.editor-panel {
+  position: absolute;
+  z-index: 30;
+  right: 24px;
+  bottom: 24px;
+
+  width: min(400px, calc(100% - 48px));
+  max-height: 76dvh;
+  overflow-y: auto;
+
+  padding: 22px;
+  border: 1px solid #e7e0ef;
+  border-radius: 20px;
+  background: #fff;
+  color: #282532;
+  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.15);
+}
+
+.editor-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.editor-heading h2 {
+  margin: 5px 0 0;
+  font-size: 21px;
+}
+
+.editor-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #7952cc;
+}
+
+.editor-close {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: #f2eef8;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.editor-original {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #f5f3f0;
+  font-size: 13px;
+}
+
+.editor-original strong {
+  color: #696472;
+  font-size: 11px;
+}
+
+.editor-label {
+  display: block;
+  margin: 19px 0 8px;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.editor-input {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 12px;
+  border: 1px solid #d8d2e1;
+  border-radius: 10px;
+  background: white;
+  color: #292530;
+  font: inherit;
+  font-size: 14px;
+}
+
+.editor-input:focus {
+  outline: 2px solid #ab93e6;
+  outline-offset: 1px;
+}
+
+.editor-units {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.editor-unit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f6f3fa;
+}
+
+.editor-unit div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.editor-unit strong {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.editor-unit small,
+.editor-search-results small {
+  color: #777;
+  font-size: 11px;
+}
+
+.editor-unit button {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 8px;
+  background: #e8e1f2;
+  color: #6b4d9d;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.editor-search-results {
+  margin-top: 7px;
+  border: 1px solid #e6e0ed;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.editor-search-results button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 11px;
+  border: 0;
+  border-bottom: 1px solid #eeeaf3;
+  background: white;
+  text-align: left;
+  cursor: pointer;
+}
+
+.editor-search-results button:hover {
+  background: #f7f4fc;
+}
+
+.editor-search-results button span:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.editor-search-results strong {
+  font-size: 12px;
+}
+
+.editor-empty {
+  margin: 8px 0;
+  color: #777;
+  font-size: 12px;
+}
+
+.editor-save {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 22px;
+  border: 0;
+  border-radius: 12px;
+  background: #7652c5;
+  color: white;
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .edit-toolbar {
+    top: 106px;
+    left: 16px;
+    right: auto;
+    flex-wrap: wrap;
+  }
+
+  .editor-panel {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-height: 65dvh;
+    padding: 20px;
+    border-radius: 22px 22px 0 0;
+  }
+}
