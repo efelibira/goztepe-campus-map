@@ -490,3 +490,110 @@
     border-radius: 22px 22px 0 0;
   }
 }
+/* v0.9 Kampüs arama sistemi */
+
+.campus-search {
+  position: absolute;
+  z-index: 35;
+  top: 105px;
+  left: 24px;
+  width: min(350px, calc(100% - 48px));
+  font-family: inherit;
+}
+
+.campus-search-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  min-height: 48px;
+  border: 1px solid #e8e1f0;
+  border-radius: 14px;
+  background: white;
+  box-shadow: 0 5px 24px rgba(33, 24, 49, 0.1);
+}
+
+.campus-search-icon {
+  font-size: 25px;
+  color: #7455ab;
+}
+
+.campus-search input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #292530;
+  font: inherit;
+  font-size: 15px;
+}
+
+.campus-search-results {
+  margin-top: 8px;
+  overflow: hidden;
+  max-height: 350px;
+  overflow-y: auto;
+  border: 1px solid #e8e1f0;
+  border-radius: 14px;
+  background: white;
+  box-shadow: 0 12px 35px rgba(33, 24, 49, 0.14);
+}
+
+.campus-search-result {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 13px 15px;
+  border: none;
+  border-bottom: 1px solid #f0ecf4;
+  background: white;
+  text-align: left;
+  cursor: pointer;
+}
+
+.campus-search-result:last-child {
+  border-bottom: none;
+}
+
+.campus-search-result:hover,
+.campus-search-result:focus-visible {
+  background: #f6f1fd;
+}
+
+.campus-search-result-name {
+  font-size: 14px;
+  font-weight: 650;
+  color: #282332;
+}
+
+.campus-search-result-detail {
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #777080;
+}
+
+.campus-search-result-action {
+  margin-top: 7px;
+  font-size: 11px;
+  font-weight: 650;
+  color: #7652c5;
+}
+
+.campus-search-empty {
+  padding: 17px;
+  color: #777080;
+  font-size: 13px;
+}
+
+@media (max-width: 700px) {
+  .campus-search {
+    top: 166px;
+    left: 16px;
+    width: min(350px, calc(100% - 32px));
+  }
+}

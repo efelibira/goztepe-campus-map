@@ -566,6 +566,22 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          29.054706352634867,
+          40.98697147947719
+        ]
+      },
+      "properties": {
+        "name": "MEDİKO (Göztepe Yerleşkesi)",
+        "category": "Sağlık Birimleri ve Hastaneler",
+        "campus": "Göztepe Yerleşkesi",
+        "website": "https://sks.marmara.edu.tr/"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           29.051420419403225,
           40.9852052619508
         ]
@@ -860,6 +876,22 @@
       },
       "properties": {
         "name": "Çamaşırhane (Göztepe Yerleşkesi)",
+        "category": "Diğer",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.05457292770969,
+          40.98627692354583
+        ]
+      },
+      "properties": {
+        "name": "Kompost Ünitesi Alanı (Göztepe Yerleşkesi)",
         "category": "Diğer",
         "campus": "Göztepe Yerleşkesi",
         "website": null
