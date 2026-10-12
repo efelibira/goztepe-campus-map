@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@turf/boolean-point-in-polygon": "^7.4.0",
+    "@turf/centroid": "^7.4.0",
     "maplibre-gl": "^6.14.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
