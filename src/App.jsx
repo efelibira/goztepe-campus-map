@@ -2,14 +2,20 @@ import { Map as MapLibreMap, NavigationControl, setWorkerUrl } from 'maplibre-gl
 import { useEffect, useMemo, useRef, useState } from 'react'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import { centroid } from '@turf/centroid'
+import { buildWalkingGraph, findWalkingRoute } from './routeEngine'
 
 import { excludeBaseBuildings } from './excludeBaseBuildings'
 import { applyCampusStyle, campusColors } from './campusStyle'
 import BuildingEditor from './BuildingEditor'
 import SearchPanel from './SearchPanel'
+import { usePanelPresence } from './usePanelPresence'
+import { syncBuildingLabels } from './buildingLabels'
+import { HOME_CAMERA, CAMERA_ANIMATION_DURATION, BUILDING_CAMERA } from './mapCamera'
 
 import 'maplibre-gl/dist/maplibre-gl.css'
 import './App.css'
+import './panelMotion.css'
+import './routeStyles.css'
 
 setWorkerUrl(workerUrl)
 
@@ -95,6 +101,8 @@ function App() {
   const mapRef = useRef(null)
   const selectedIdRef = useRef(null)
   const featuresRef = useRef(new Map())
+  const routeGraphRef = useRef(null)
+  const activeRouteIdRef = useRef(null)
   const overridesRef = useRef(loadOverrides())
 
   const [editMode, setEditMode] = useState(false)
@@ -104,6 +112,30 @@ function App() {
   const [poiList, setPoiList] = useState([])
   const [overrides, setOverrides] = useState(overridesRef.current)
   const [error, setError] = useState('')
+  const [routeInfo, setRouteInfo] = useState(null)
+  const [routeError, setRouteError] = useState('')
+  const [animationsEnabled, setAnimationsEnabled] = useState(() => {
+    try {
+      return localStorage.getItem('goztepe-panel-animations') !== 'off'
+    } catch {
+      return true
+    }
+  })
+
+  const { presented: visibleBuilding, exiting: cardExiting } =
+    usePanelPresence(selectedBuilding, 160, animationsEnabled)
+
+  function toggleAnimations() {
+    setAnimationsEnabled((previous) => {
+      const next = !previous
+      try {
+        localStorage.setItem('goztepe-panel-animations', next ? 'on' : 'off')
+      } catch {
+        // Private browsing can block storage. Keep the setting for this session.
+      }
+      return next
+    })
+  }
 
   const searchableBuildings = useMemo(
     () =>
@@ -113,6 +145,60 @@ function App() {
     [buildingFeatures, overrides]
   )
 
+  function clearRoute() {
+    activeRouteIdRef.current = null
+    setRouteInfo(null)
+    setRouteError('')
+    const source = mapRef.current?.getSource('campus-route')
+    if (source) source.setData({ type: 'FeatureCollection', features: [] })
+    const points = mapRef.current?.getSource('campus-route-points')
+    if (points) points.setData({ type: 'FeatureCollection', features: [] })
+  }
+
+  function showRoute() {
+    const map = mapRef.current
+    const targetId = selectedIdRef.current
+    if (!map || targetId === null) return
+    if (String(targetId) === 'osm:way/1020362430') {
+      setRouteError('Zaten A Kapısı’ndasın. Başka bir bina seç.')
+      return
+    }
+    try {
+      const result = findWalkingRoute(routeGraphRef.current, featuresRef.current, targetId)
+      const routeSource = map.getSource('campus-route')
+      const pointSource = map.getSource('campus-route-points')
+      if (!routeSource || !pointSource) throw new Error('Rota katmanı henüz hazır değil.')
+      routeSource.setData({
+        type: 'Feature', properties: {},
+        geometry: { type: 'LineString', coordinates: result.coordinates },
+      })
+      pointSource.setData({
+        type: 'FeatureCollection',
+        features: [result.start, result.end].map((coord, i) => ({
+          type: 'Feature', properties: { point: i },
+          geometry: { type: 'Point', coordinates: coord },
+        })),
+      })
+      activeRouteIdRef.current = String(targetId)
+      setRouteInfo(result)
+      setRouteError('')
+      const lngs = result.coordinates.map((point) => point[0])
+      const lats = result.coordinates.map((point) => point[1])
+      map.fitBounds([
+        [Math.min(...lngs), Math.min(...lats)],
+        [Math.max(...lngs), Math.max(...lats)],
+      ], {
+        padding: { top: 110, right: 90, bottom: 90, left: Math.min(380, window.innerWidth * .28) },
+        duration: CAMERA_ANIMATION_DURATION,
+        maxZoom: 18,
+        pitch: 35,
+      })
+    } catch (err) {
+      clearRoute()
+      setRouteError(err.message || 'Rota hesaplanamadı.')
+    }
+  }
+
   // Hem harita tıklaması hem arama sonucu aynı seçim işlemini kullanır.
   function selectBuilding(id, moveCamera = false) {
     const map = mapRef.current
@@ -121,6 +207,8 @@ function App() {
     if (!map || !feature || !map.getSource('campus-buildings')) {
       return
     }
+
+    if (activeRouteIdRef.current && activeRouteIdRef.current !== String(id)) clearRoute()
 
     if (selectedIdRef.current !== null) {
       map.setFeatureState(
@@ -152,10 +240,10 @@ function App() {
 
         map.flyTo({
           center,
-          zoom: Math.max(map.getZoom(), 17.5),
-          pitch: 45,
+          zoom: Math.max(map.getZoom(), BUILDING_CAMERA.minZoom),
+          pitch: BUILDING_CAMERA.pitch,
           essential: true,
-          duration: 1100,
+          duration: CAMERA_ANIMATION_DURATION,
         })
       } catch (err) {
         console.warn('Binaya kamera hareketi yapılamadı:', err)
@@ -165,18 +253,16 @@ function App() {
 
   useEffect(() => {
     if (!mapContainer.current) return
-
-    const map = new MapLibreMap({
-      container: mapContainer.current,
-      style: 'https://tiles.openfreemap.org/styles/liberty',
-      center: [29.0537, 40.9853],
-      zoom: 16,
-      minZoom: 13,
-      maxZoom: 20,
-      pitch: 40,
-      bearing: -20,
-    })
-
+const map = new MapLibreMap({
+  container: mapContainer.current,
+  style: 'https://tiles.openfreemap.org/styles/liberty',
+  ...HOME_CAMERA,
+  zoom: 16.7,
+  minZoom: 16,
+  maxZoom: 20,
+  pitch: 30,
+  bearing: -20,
+})
     mapRef.current = map
 
     map.addControl(
@@ -197,12 +283,14 @@ function App() {
           rawResponse,
           poisResponse,
           overridesResponse,
+          walkwaysResponse,
         ] = await Promise.all([
           fetch('/data/goztepe-buildings-3d.geojson'),
           fetch('/data/goztepe-boundary.geojson'),
-          fetch('/data/goztepe-buildings-raw.geojson'),
+          fetch('/data/goztepe-surroundings.geojson'),
           fetch('/data/goztepe-poi.geojson'),
           fetch('/data/building-overrides.json'),
+          fetch('/data/goztepe-walkways.geojson'),
         ])
 
         if (
@@ -210,7 +298,8 @@ function App() {
           !boundaryResponse.ok ||
           !rawResponse.ok ||
           !poisResponse.ok ||
-          !overridesResponse.ok
+          !overridesResponse.ok ||
+          !walkwaysResponse.ok
         ) {
           throw new Error('Harita veri dosyalarından biri yüklenemedi.')
         }
@@ -220,6 +309,7 @@ function App() {
         const rawBuildings = await rawResponse.json()
         const pois = await poisResponse.json()
         const publishedOverrides = await overridesResponse.json()
+        const walkways = await walkwaysResponse.json()
 
         if (cancelled) return
 
@@ -281,9 +371,55 @@ function App() {
         featuresRef.current = new Map(
           features.map((feature) => [String(feature.id), feature])
         )
+        routeGraphRef.current = buildWalkingGraph(walkways)
 
         // Mevcut çevre binaları ve çakışma çözümü korunuyor.
         excludeBaseBuildings(map, boundary, rawBuildings)
+
+        // Marmara kampüs zemin katmanı
+        map.addSource('campus-ground', {
+          type: 'geojson',
+          data: boundary,
+        })
+
+        const firstLineLayer = map
+          .getStyle()
+          .layers.find((layer) => layer.type === 'line')
+
+        map.addLayer(
+          {
+            id: 'campus-ground-fill',
+            type: 'fill',
+            source: 'campus-ground',
+            paint: {
+              'fill-color': campusColors.campusGround,
+              'fill-opacity': 0.68,
+            },
+          },
+          firstLineLayer?.id
+        )
+
+
+
+
+
+
+        // Çevre binalarını her zoom seviyesinde göster.
+        if (map.getLayer('outside-buildings-3d')) {
+          map.setLayoutProperty(
+            'outside-buildings-3d',
+            'visibility',
+            'visible'
+          )
+
+          map.setLayerZoomRange('outside-buildings-3d', 0, 24)
+
+          map.setPaintProperty(
+            'outside-buildings-3d',
+            'fill-extrusion-opacity',
+            0.95
+          )
+        }
 
         map.addSource('campus-buildings', {
           type: 'geojson',
@@ -299,7 +435,7 @@ function App() {
             'fill-extrusion-color': [
               'case',
               ['boolean', ['feature-state', 'selected'], false],
-              campusColors.selected,
+              campusColors.building,
               campusColors.building,
             ],
             'fill-extrusion-height': [
@@ -310,6 +446,29 @@ function App() {
             'fill-extrusion-base': 0,
             'fill-extrusion-opacity': 0.95,
             'fill-extrusion-vertical-gradient': true,
+          },
+        })
+
+        // Kullanıcı rota isteyene kadar katmanlar boş kalır.
+        const emptyRoutes = { type: 'FeatureCollection', features: [] }
+        map.addSource('campus-route', { type: 'geojson', data: emptyRoutes })
+        map.addLayer({
+          id: 'campus-route-outline', type: 'line', source: 'campus-route',
+          layout: { 'line-cap': 'round', 'line-join': 'round' },
+          paint: { 'line-color': '#ffffff', 'line-width': 11, 'line-opacity': .94 },
+        })
+        map.addLayer({
+          id: 'campus-route-line', type: 'line', source: 'campus-route',
+          layout: { 'line-cap': 'round', 'line-join': 'round' },
+          paint: { 'line-color': '#1769e0', 'line-width': 6, 'line-opacity': .98 },
+        })
+        map.addSource('campus-route-points', { type: 'geojson', data: emptyRoutes })
+        map.addLayer({
+          id: 'campus-route-markers', type: 'circle', source: 'campus-route-points',
+          paint: {
+            'circle-radius': 8,
+            'circle-color': ['match', ['get', 'point'], 0, '#15a47d', '#1769e0'],
+            'circle-stroke-color': '#ffffff', 'circle-stroke-width': 3,
           },
         })
 
@@ -327,7 +486,17 @@ function App() {
           const feature = event.features?.[0]
           if (!feature) return
 
-          selectBuilding(feature.id)
+          selectBuilding(feature.id, true)
+        })
+
+        map.on('click', (event) => {
+          const buildings = map.queryRenderedFeatures(event.point, {
+            layers: ['campus-building-fill'],
+          })
+
+          if (buildings.length === 0) {
+            closeCard()
+          }
         })
 
         map.on('mouseenter', 'campus-building-fill', () => {
@@ -372,6 +541,8 @@ function App() {
       mapRef.current = null
       selectedIdRef.current = null
       featuresRef.current = new Map()
+      routeGraphRef.current = null
+      activeRouteIdRef.current = null
     }
   }, [])
 
@@ -386,7 +557,7 @@ function App() {
       ? [
           'case',
           ['boolean', ['feature-state', 'selected'], false],
-          campusColors.selected,
+          campusColors.building,
 
           ['==', ['feature-state', 'reviewStatus'], 'verified'],
           '#89c5a3',
@@ -425,7 +596,27 @@ function App() {
     }
   }, [overrides, buildingFeatures])
 
+
+  // Bina etiketlerini yükle ve isim değişikliklerinde güncelle.
+  useEffect(() => {
+    const map = mapRef.current
+
+    if (!map?.getLayer('campus-building-fill')) return
+    if (!buildingFeatures.length) return
+
+    syncBuildingLabels(map, buildingFeatures, overrides)
+  }, [buildingFeatures, overrides])
+
   function closeCard() {
+    clearRoute()
+    // Kamera geri dönüşü v0.9.3
+    mapRef.current?.flyTo({
+        ...HOME_CAMERA,
+        
+        duration: CAMERA_ANIMATION_DURATION,
+      })
+
+
     const map = mapRef.current
 
     if (
@@ -535,6 +726,7 @@ function App() {
         buildings={searchableBuildings}
         onSelect={(id) => selectBuilding(id, true)}
         loading={buildingCount === null}
+        animationsEnabled={animationsEnabled}
       />
 
       <div className="edit-toolbar">
@@ -557,6 +749,16 @@ function App() {
         )}
       </div>
 
+      <button
+        type="button"
+        className="motion-toggle"
+        aria-pressed={animationsEnabled}
+        onClick={toggleAnimations}
+        title="Panel animasyonlarını aç veya kapat"
+      >
+        Animasyon: {animationsEnabled ? 'Açık' : 'Kapalı'}
+      </button>
+
       <div className="map-status">
         <span className="status-dot" />
 
@@ -575,8 +777,13 @@ function App() {
           onSave={saveBuilding}
           onClose={closeCard}
         />
-      ) : selectedBuilding ? (
-        <section className="building-card">
+      ) : visibleBuilding && !editMode ? (
+        <section
+          className="building-card"
+          data-motion={animationsEnabled ? (cardExiting ? 'exit' : 'enter') : 'off'}
+          aria-hidden={cardExiting}
+          inert={cardExiting ? true : undefined}
+        >
           <button
             type="button"
             className="card-close"
@@ -588,16 +795,16 @@ function App() {
 
           <div className="card-label">SEÇİLEN BİNA</div>
 
-          <h2>{selectedBuilding.name}</h2>
+          <h2>{visibleBuilding.name}</h2>
 
-          {selectedBuilding.units.length > 0 ? (
+          {visibleBuilding.units.length > 0 ? (
             <>
               <p className="card-description">
                 Bu binayla ilişkilendirilen birimler
               </p>
 
               <div className="unit-list">
-                {selectedBuilding.units.map((unit, index) => (
+                {visibleBuilding.units.map((unit, index) => (
                   <div className="unit-item" key={index}>
                     <span className="unit-category">
                       {unit.category}
@@ -622,6 +829,27 @@ function App() {
             <p className="card-description">
               Bu binayla ilişkilendirilmiş birim bulunmuyor.
             </p>
+          )}
+          {!cardExiting && (
+            <div className="route-actions">
+              {routeInfo && activeRouteIdRef.current === String(visibleBuilding.id) ? (
+                <>
+                  <button type="button" className="route-action route-stop" onClick={clearRoute}>
+                    × Rotayı kapat
+                  </button>
+                  <p className="route-summary">
+                    <strong>🚶 {routeInfo.meters} m</strong>
+                    <span>Yaklaşık {routeInfo.minutes} dk yürüyüş</span>
+                  </p>
+                </>
+              ) : (
+                <button type="button" className="route-action" onClick={showRoute}>
+                  ↗ A Kapısı'ndan yol tarifi
+                </button>
+              )}
+              {routeError && <p className="route-notice route-error" role="status">{routeError}</p>}
+              <p className="route-notice">Prototip rota · OSM yolları kullanılır, bina girişleri yaklaşık.</p>
+            </div>
           )}
         </section>
       ) : null}

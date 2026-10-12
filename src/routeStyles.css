@@ -1,0 +1,20 @@
+/* Prototip yol tarifi: bilgi kartının konumu değiştirilmez. */
+.app .route-actions { margin-top: 16px; }
+.app .route-action {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; min-height: 42px; padding: 10px 14px;
+  border: 1px solid #bbdefb; border-radius: 12px;
+  background: #0d47a1; color: white; font: inherit;
+  font-size: 13px; font-weight: 650; cursor: pointer;
+  transition: background 180ms ease, transform 180ms ease;
+}
+.app .route-action:hover { background: #1565c0; }
+.app .route-action:active { transform: scale(.985); }
+.app .route-action.route-stop { background: #e3f2fd; color: #0d47a1; }
+.app .route-action.route-stop:hover { background: #cde8fc; }
+.app .route-summary {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 6px 12px;
+  margin: 12px 0 0; color: #37536a; font-size: 12px; line-height: 1.5;
+}
+.app .route-notice { margin: 10px 0 0; color: #58718a; font-size: 11px; line-height: 1.5; }
+.app .route-error { color: #a33c3c; }

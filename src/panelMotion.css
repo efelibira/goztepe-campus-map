@@ -1,0 +1,90 @@
+
+/* Material 3 Expressive-inspired panel motion */
+
+@keyframes campus-panel-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes campus-panel-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px) scale(.97);
+  }
+}
+
+@keyframes campus-suggestions-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px) scale(.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes campus-suggestions-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-6px) scale(.98, .95);
+  }
+}
+
+.app .building-card[data-motion="enter"] {
+  animation: campus-panel-in 320ms
+    cubic-bezier(.2, 0, 0, 1) both;
+}
+
+.app .building-card[data-motion="exit"] {
+  animation: campus-panel-out 160ms
+    cubic-bezier(.4, 0, 1, 1) both;
+  pointer-events: none;
+}
+
+.app .campus-search-results[data-motion="enter"] {
+  animation: campus-suggestions-in 280ms
+    cubic-bezier(.2, 0, 0, 1) both;
+  transform-origin: top center;
+}
+
+.app .campus-search-results[data-motion="exit"] {
+  animation: campus-suggestions-out 140ms
+    cubic-bezier(.4, 0, 1, 1) both;
+  transform-origin: top center;
+  pointer-events: none;
+}
+
+.app .motion-toggle {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  z-index: 30;
+  padding: 9px 12px;
+  border: 1px solid var(--campus-border, #DAE4EA);
+  border-radius: 12px;
+  color: var(--campus-dark, #0D47A1);
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(31, 58, 79, .08);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.app .motion-toggle:hover { background: var(--campus-ice, #E3F2FD); }
+@media (max-width: 700px) {
+  .app .motion-toggle { right: 16px; bottom: 16px; }
+}

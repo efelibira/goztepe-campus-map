@@ -63,7 +63,7 @@ export function excludeBaseBuildings(map, boundary, rawBuildings) {
     source: 'outside-buildings',
 
     paint: {
-      'fill-extrusion-color': '#b7b5b0',
+      'fill-extrusion-color': '#C5C9CB',
 
       'fill-extrusion-height': [
         'get',

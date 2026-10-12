@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
+import { usePanelPresence } from './usePanelPresence'
 
 function normalize(text) {
   return String(text || '')
@@ -13,6 +14,7 @@ export default function SearchPanel({
   buildings,
   onSelect,
   loading,
+  animationsEnabled = true,
 }) {
   const [query, setQuery] = useState('')
   const [open, setOpen] = useState(false)
@@ -47,6 +49,13 @@ export default function SearchPanel({
       })
       .slice(0, 8)
   }, [buildings, query])
+
+  const showResults = open && Boolean(query.trim())
+  const { presented: resultsMounted, exiting: resultsExiting } =
+    usePanelPresence(showResults, 140, animationsEnabled)
+  const lastResults = useRef([])
+  if (showResults) lastResults.current = results
+  const visibleResults = showResults ? results : lastResults.current
 
   function choose(building) {
     onSelect(building.id)
@@ -88,10 +97,15 @@ export default function SearchPanel({
         />
       </div>
 
-      {open && query.trim() && (
-        <div className="campus-search-results">
-          {results.length > 0 ? (
-            results.map((building) => (
+      {resultsMounted && (
+        <div
+          className="campus-search-results"
+          data-motion={animationsEnabled ? (resultsExiting ? 'exit' : 'enter') : 'off'}
+          aria-hidden={resultsExiting}
+          inert={resultsExiting ? true : undefined}
+        >
+          {visibleResults.length > 0 ? (
+            visibleResults.map((building) => (
               <button
                 key={building.id}
                 type="button"

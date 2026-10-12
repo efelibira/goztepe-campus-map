@@ -597,3 +597,300 @@
     width: min(350px, calc(100% - 32px));
   }
 }
+
+/* v0.9.1 Bilgi kartı konumu */
+
+.app .building-card {
+  position: absolute;
+  top: 235px;
+  left: 24px;
+  right: auto;
+  bottom: auto;
+
+  transform: none;
+  width: min(350px, calc(100% - 48px));
+  max-height: calc(100dvh - 255px);
+  overflow-y: auto;
+
+  z-index: 30;
+}
+
+@media (max-width: 700px) {
+  .app .building-card {
+    top: 225px;
+    left: 16px;
+    right: auto;
+    bottom: auto;
+
+    transform: none;
+    width: min(350px, calc(100% - 32px));
+    max-height: calc(100dvh - 245px);
+    border-radius: 16px;
+  }
+}
+
+
+
+/* MARMARA BLUE UI */
+
+:root {
+  --marmara-ice: #E3F2FD;
+  --marmara-light: #90CAF9;
+  --marmara-blue: #2196F3;
+  --marmara-dark: #0D47A1;
+}
+
+.app .map-header-icon,
+.app .card-close,
+.app .editor-close,
+.app .editor-unit button {
+  background: var(--marmara-ice);
+  color: var(--marmara-dark);
+}
+
+.app .campus-search-icon,
+.app .campus-search-result-action,
+.app .editor-eyebrow,
+.app .card-label,
+.app .unit-category,
+.app .unit-item a,
+.app .building-card a {
+  color: var(--marmara-dark);
+}
+
+.app .edit-toggle,
+.app .edit-export {
+  background: #FFFFFF;
+  color: var(--marmara-dark);
+  border-color: #BBDEFB;
+}
+
+.app .edit-toggle.active,
+.app .editor-save {
+  background: var(--marmara-dark);
+  border-color: var(--marmara-dark);
+  color: #FFFFFF;
+}
+
+.app .unit-item,
+.app .editor-unit,
+.app .editor-original {
+  background: #F1F8FE;
+}
+
+.app .campus-search-result:hover,
+.app .campus-search-result:focus-visible {
+  background: var(--marmara-ice);
+}
+
+.app .editor-input:focus,
+.app button:focus-visible {
+  outline-color: var(--marmara-blue);
+}
+
+
+/* === MARMARA CAMPUS UI V2 === */
+
+:root {
+  --campus-ice: #E3F2FD;
+  --campus-light: #90CAF9;
+  --campus-blue: #2196F3;
+  --campus-dark: #0D47A1;
+  --campus-border: #DAE4EA;
+  --campus-surface: #FFFFFF;
+}
+
+/* Sol üst arayüz hizalaması */
+.app .map-header,
+.app .campus-search,
+.app .building-card {
+  left: 20px;
+  width: min(350px, calc(100% - 40px));
+  box-sizing: border-box;
+}
+
+/* Ortak panel karakteri */
+.app .map-header,
+.app .campus-search-input-wrap,
+.app .campus-search-results,
+.app .building-card,
+.app .editor-panel {
+  background: var(--campus-surface);
+  border: 1px solid var(--campus-border);
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(31, 58, 79, 0.08);
+}
+
+.app .map-header-icon {
+  background: var(--campus-ice);
+  color: var(--campus-dark);
+}
+
+.app .campus-search-icon,
+.app .campus-search-result-action,
+.app .card-label,
+.app .unit-category,
+.app .editor-eyebrow,
+.app .building-card a {
+  color: var(--campus-dark);
+}
+
+/* Bilgi kartı */
+.app .building-card {
+  max-height: calc(100dvh - 265px);
+  overflow-y: auto;
+}
+
+.app .building-card h2 {
+  line-height: 1.3;
+}
+
+.app .unit-item,
+.app .editor-unit {
+  background: #F2F7FB;
+  border-radius: 11px;
+}
+
+.app .unit-category {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.app .unit-item strong {
+  line-height: 1.5;
+}
+
+/* Düğmeler */
+.app .edit-toggle,
+.app .edit-export {
+  color: var(--campus-dark);
+  background: #FFFFFF;
+  border: 1px solid #C6D9E9;
+  border-radius: 12px;
+}
+
+.app .edit-toggle.active,
+.app .editor-save {
+  color: #FFFFFF;
+  background: var(--campus-dark);
+  border-color: var(--campus-dark);
+}
+
+.app .edit-toggle.active:hover,
+.app .editor-save:hover {
+  color: #FFFFFF;
+  background: #1565C0;
+}
+
+.app .card-close,
+.app .editor-close,
+.app .editor-unit button {
+  color: var(--campus-dark);
+  background: var(--campus-ice);
+}
+
+.app .campus-search-result:hover,
+.app .campus-search-result:focus-visible {
+  background: var(--campus-ice);
+}
+
+.app .editor-input:focus,
+.app button:focus-visible {
+  outline-color: var(--campus-blue);
+}
+
+@media (max-width: 700px) {
+  .app .map-header,
+  .app .campus-search,
+  .app .building-card {
+    left: 16px;
+    width: min(350px, calc(100% - 32px));
+  }
+
+  .app .building-card {
+    max-height: 55dvh;
+  }
+}
+
+
+/* PASTEL CAMPUS V3 */
+
+.app {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+}
+
+.app button,
+.app input,
+.app select {
+  font-family: inherit;
+}
+
+.app .map-header h1 {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.app .building-card h2 {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.app .unit-category {
+  font-weight: 650;
+  letter-spacing: 0.01em;
+}
+
+.app .campus-search input {
+  font-size: 14px;
+}
+
+
+/* BILGI KARTI KONUM V4 */
+
+/* Başlık ve arama kutusu aynı hizada */
+.app .campus-search {
+  top: 105px;
+  left: 20px;
+  width: min(350px, calc(100% - 40px));
+}
+
+/* Arama kutusunun hemen altında bilgi kartı */
+.app .building-card {
+  position: absolute;
+  top: 163px;
+  left: 20px;
+  right: auto;
+  bottom: auto;
+  transform: none;
+
+  width: min(350px, calc(100% - 40px));
+  max-height: calc(100dvh - 259px);
+  overflow-y: auto;
+  box-sizing: border-box;
+  z-index: 30;
+}
+
+@media (max-width: 700px) {
+  .app .campus-search {
+    top: 105px;
+    left: 16px;
+    width: min(350px, calc(100% - 32px));
+  }
+
+  .app .building-card {
+    top: 163px;
+    left: 16px;
+    right: auto;
+    bottom: auto;
+    transform: none;
+
+    width: min(350px, calc(100% - 32px));
+    max-height: min(55dvh, calc(100dvh - 244px));
+  }
+}
