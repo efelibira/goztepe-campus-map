@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { Map, NavigationControl, Popup, setWorkerUrl } from 'maplibre-gl'
+import { Map, NavigationControl, setWorkerUrl } from 'maplibre-gl'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
-import { centroid } from '@turf/centroid'
-import { booleanPointInPolygon } from '@turf/boolean-point-in-polygon'
 
 import 'maplibre-gl/dist/maplibre-gl.css'
 import './App.css'
@@ -11,6 +9,10 @@ setWorkerUrl(workerUrl)
 
 function App() {
   const mapContainer = useRef(null)
+  const mapRef = useRef(null)
+  const selectedIdRef = useRef(null)
+
+  const [selectedBuilding, setSelectedBuilding] = useState(null)
   const [buildingCount, setBuildingCount] = useState(null)
   const [error, setError] = useState('')
 
@@ -26,78 +28,29 @@ function App() {
       bearing: 0,
     })
 
+    mapRef.current = map
     map.addControl(new NavigationControl(), 'top-right')
 
-    let selectedId = null
-    let popup = null
     let cancelled = false
 
-    async function loadCampusData() {
+    async function loadBuildings() {
       try {
-        const [buildingsResponse, boundaryResponse] = await Promise.all([
-          fetch('/data/goztepe-buildings-raw.geojson'),
-          fetch('/data/goztepe-boundary.geojson'),
-        ])
+        const response = await fetch(
+          '/data/goztepe-buildings-matched.geojson'
+        )
 
-        if (!buildingsResponse.ok || !boundaryResponse.ok) {
-          throw new Error('GeoJSON dosyalarından biri yüklenemedi.')
+        if (!response.ok) {
+          throw new Error('Eşleştirilmiş bina verileri yüklenemedi.')
         }
 
-        const buildings = await buildingsResponse.json()
-        const boundary = await boundaryResponse.json()
-
+        const data = await response.json()
         if (cancelled) return
 
-        const campusBoundary = boundary.features?.[0]
+        setBuildingCount(data.features.length)
 
-        if (
-          !campusBoundary ||
-          !['Polygon', 'MultiPolygon'].includes(campusBoundary.geometry?.type)
-        ) {
-          throw new Error('Kampüs sınırı geçerli bir Polygon değil.')
-        }
-
-        // Bina merkezleri sınırın içinde mi?
-        const campusBuildings = buildings.features.filter((building) => {
-          if (
-            !['Polygon', 'MultiPolygon'].includes(building.geometry?.type)
-          ) {
-            return false
-          }
-
-          const buildingCenter = centroid(building)
-
-          return booleanPointInPolygon(buildingCenter, campusBoundary)
-        })
-
-        const filteredGeoJSON = {
-          type: 'FeatureCollection',
-          features: campusBuildings,
-        }
-
-        setBuildingCount(campusBuildings.length)
-
-        // Kampüs sınırı
-        map.addSource('campus-boundary', {
-          type: 'geojson',
-          data: boundary,
-        })
-
-        map.addLayer({
-          id: 'campus-boundary-line',
-          type: 'line',
-          source: 'campus-boundary',
-          paint: {
-            'line-color': '#7654c4',
-            'line-width': 3,
-            'line-dasharray': [3, 2],
-          },
-        })
-
-        // Filtrelenmiş binalar
         map.addSource('campus-buildings', {
           type: 'geojson',
-          data: filteredGeoJSON,
+          data,
           generateId: true,
         })
 
@@ -109,10 +62,10 @@ function App() {
             'fill-color': [
               'case',
               ['boolean', ['feature-state', 'selected'], false],
-              '#7046c8',
-              '#bba8e7',
+              '#7952cc',
+              '#c5b3ed',
             ],
-            'fill-opacity': 0.75,
+            'fill-opacity': 0.8,
           },
         })
 
@@ -121,36 +74,56 @@ function App() {
           type: 'line',
           source: 'campus-buildings',
           paint: {
-            'line-color': '#6c529e',
+            'line-color': '#775aaf',
             'line-width': 1.5,
           },
         })
 
-        // Binaya tıklama
         map.on('click', 'campus-building-fill', (event) => {
-          const building = event.features?.[0]
-          if (!building) return
+          const feature = event.features?.[0]
+          if (!feature) return
 
-          if (selectedId !== null) {
+          if (selectedIdRef.current !== null) {
             map.setFeatureState(
-              { source: 'campus-buildings', id: selectedId },
+              {
+                source: 'campus-buildings',
+                id: selectedIdRef.current,
+              },
               { selected: false }
             )
           }
 
-          selectedId = building.id
+          selectedIdRef.current = feature.id
 
           map.setFeatureState(
-            { source: 'campus-buildings', id: selectedId },
+            {
+              source: 'campus-buildings',
+              id: feature.id,
+            },
             { selected: true }
           )
 
-          popup?.remove()
+          // GeoJSON özelliklerindeki diziler MapLibre tarafından
+          // string olarak döndürülebilir.
+          let units = feature.properties?.marmaraUnits || []
 
-          popup = new Popup({ offset: 12 })
-            .setLngLat(event.lngLat)
-            .setText(building.properties?.name || 'İsimsiz bina')
-            .addTo(map)
+          if (typeof units === 'string') {
+            try {
+              units = JSON.parse(units)
+            } catch {
+              units = []
+            }
+          }
+
+          if (!Array.isArray(units)) units = []
+
+          setSelectedBuilding({
+            name:
+              feature.properties?.name ||
+              units[0]?.name ||
+              'Henüz isimlendirilmemiş bina',
+            units,
+          })
         })
 
         map.on('mouseenter', 'campus-building-fill', () => {
@@ -160,11 +133,6 @@ function App() {
         map.on('mouseleave', 'campus-building-fill', () => {
           map.getCanvas().style.cursor = ''
         })
-
-        console.log(
-          `Toplam ${buildings.features.length} binadan ` +
-          `${campusBuildings.length} tanesi kampüs sınırında.`
-        )
       } catch (err) {
         if (!cancelled) {
           console.error(err)
@@ -173,14 +141,31 @@ function App() {
       }
     }
 
-    map.once('load', loadCampusData)
+    map.once('load', loadBuildings)
 
     return () => {
       cancelled = true
-      popup?.remove()
       map.remove()
+      mapRef.current = null
     }
   }, [])
+
+  function closeCard() {
+    const map = mapRef.current
+
+    if (map && selectedIdRef.current !== null) {
+      map.setFeatureState(
+        {
+          source: 'campus-buildings',
+          id: selectedIdRef.current,
+        },
+        { selected: false }
+      )
+    }
+
+    selectedIdRef.current = null
+    setSelectedBuilding(null)
+  }
 
   return (
     <main className="app">
@@ -188,7 +173,6 @@ function App() {
 
       <header className="map-header">
         <div className="map-header-icon">⌖</div>
-
         <div className="map-header-text">
           <h1>Göztepe Kampüsü</h1>
           <p>Marmara Üniversitesi</p>
@@ -197,12 +181,61 @@ function App() {
 
       <div className="map-status">
         <span className="status-dot" />
-        {error
-          ? `Hata: ${error}`
-          : buildingCount === null
+        {error ||
+          (buildingCount === null
             ? 'Binalar yükleniyor...'
-            : `${buildingCount} bina · Kampüs prototipi v0.3`}
+            : `${buildingCount} bina · Prototip v0.5`)}
       </div>
+
+      {selectedBuilding && (
+        <section className="building-card">
+          <button
+            className="card-close"
+            onClick={closeCard}
+            aria-label="Kartı kapat"
+          >
+            ×
+          </button>
+
+          <div className="card-label">SEÇİLEN BİNA</div>
+
+          <h2>{selectedBuilding.name}</h2>
+
+          {selectedBuilding.units.length > 0 ? (
+            <>
+              <p className="card-description">
+                Bu binayla ilişkilendirilen birimler
+              </p>
+
+              <div className="unit-list">
+                {selectedBuilding.units.map((unit, index) => (
+                  <div className="unit-item" key={index}>
+                    <span className="unit-category">
+                      {unit.category}
+                    </span>
+
+                    <strong>{unit.name}</strong>
+
+                    {unit.website && (
+                      <a
+                        href={unit.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Web sitesi ↗
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <p className="card-description">
+              Bu bina henüz isimlendirilmedi.
+            </p>
+          )}
+        </section>
+      )}
     </main>
   )
 }

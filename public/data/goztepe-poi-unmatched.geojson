@@ -1,0 +1,901 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.053990488978467,
+          40.987311360358596
+        ]
+      },
+      "properties": {
+        "name": "Fen Fakültesi",
+        "category": "Akademik Binalar",
+        "campus": "Göztepe Yerleşkesi",
+        "website": "https://fen.marmara.edu.tr/"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.053861742960674,
+          40.98924692455887
+        ]
+      },
+      "properties": {
+        "name": "Hukuk Fakültesi",
+        "category": "Akademik Binalar",
+        "campus": "Göztepe Yerleşkesi",
+        "website": "https://hukuk.marmara.edu.tr/"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.053260928148685,
+          40.98867193024259
+        ]
+      },
+      "properties": {
+        "name": "İletişim Fakültesi",
+        "category": "Akademik Binalar",
+        "campus": "Göztepe Yerleşkesi",
+        "website": "https://iletisim.marmara.edu.tr/"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.053990488978467,
+          40.987311360358596
+        ]
+      },
+      "properties": {
+        "name": "İnsan ve Toplum Bilimleri Fakültesi",
+        "category": "Akademik Binalar",
+        "campus": "Göztepe Yerleşkesi",
+        "website": "https://itbf.marmara.edu.tr/"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.05108905447617,
+          40.986982584521314
+        ]
+      },
+      "properties": {
+        "name": "Yabancı Diller Yüksekokulu",
+        "category": "Akademik Binalar",
+        "campus": "Göztepe Yerleşkesi",
+        "website": "https://ydil.marmara.edu.tr/"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.05200525975406,
+          40.98724309502671
+        ]
+      },
+      "properties": {
+        "name": "Hediyelik Eşya Mağazası (Göztepe Yerleşkesi)",
+        "category": "Alışveriş Mekanları",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.0533410169528,
+          40.98657997204764
+        ]
+      },
+      "properties": {
+        "name": "Kampüs Kırtasiye (Göztepe Yerleşkesi)",
+        "category": "Alışveriş Mekanları",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.05387597161564,
+          40.985476273248366
+        ]
+      },
+      "properties": {
+        "name": "Teknoloji Fakültesi Fotokopi Merkezi",
+        "category": "Alışveriş Mekanları",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.05447684731282,
+          40.987619583956096
+        ]
+      },
+      "properties": {
+        "name": "Ekonomik ve Sosyal Alanda Kadın Çalışmaları Uygulama ve Araştırma Merkezi (ESKAR)",
+        "category": "Araştırma ve Uygulama Merkezleri",
+        "campus": "Göztepe Yerleşkesi",
+        "website": "https://eskar.marmara.edu.tr/"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.05161318695475,
+          40.986271114941516
+        ]
+      },
+      "properties": {
+        "name": "Denizbank ATM (Göztepe Yerleşkesi)",
+        "category": "ATM'ler",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.05142006789369,
+          40.98620632417725
+        ]
+      },
+      "properties": {
+        "name": "Halkbank ATM (Göztepe Yerleşkesi)",
+        "category": "ATM'ler",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.05145446873701,
+          40.98637733905445
+        ]
+      },
+      "properties": {
+        "name": "VakıfBank ATM (Göztepe Yerleşkesi)",
+        "category": "ATM'ler",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.053990488978467,
+          40.987311360358596
+        ]
+      },
+      "properties": {
+        "name": "Fen Fakültesi & İnsan ve Toplum Bilimleri Fakültesi Derslikleri",
+        "category": "Derslikler",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.053861742960674,
+          40.98924692455887
+        ]
+      },
+      "properties": {
+        "name": "Hukuk Fakültesi Derslikleri",
+        "category": "Derslikler",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.053260928148685,
+          40.98867193024259
+        ]
+      },
+      "properties": {
+        "name": "İletişim Fakültesi Derslikleri",
+        "category": "Derslikler",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.053604250901888,
+          40.986695855238715
+        ]
+      },
+      "properties": {
+        "name": "Mekatronik Mühendisliği Laboratuvarları",
+        "category": "Derslikler",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.05431110668309,
+          40.98916653361726
+        ]
+      },
+      "properties": {
+        "name": "Workrunner Bilişim Teknolojileri Derslikleri",
+        "category": "Derslikler",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.051702051352997,
+          40.985089851487196
+        ]
+      },
+      "properties": {
+        "name": "Otobüs Durağı (Göztepe Yerleşkesi)",
+        "category": "Duraklar",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.050305635513553,
+          40.98579062594521
+        ]
+      },
+      "properties": {
+        "name": "Daire Başkanlıkları",
+        "category": "İdari Binalar",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.051388395645432,
+          40.985902161668
+        ]
+      },
+      "properties": {
+        "name": "Genel Sekreterlik ve Genel Sekreter Yardımcılığı",
+        "category": "İdari Binalar",
+        "campus": "Göztepe Yerleşkesi",
+        "website": "https://www.marmara.edu.tr/universite/yonetim/genel-sekreterlik"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.051460570500524,
+          40.985827248042916
+        ]
+      },
+      "properties": {
+        "name": "Koruma Güvenlik Şube Müdürlüğü",
+        "category": "İdari Binalar",
+        "campus": "Göztepe Yerleşkesi",
+        "website": "https://korumaguvenlik.marmara.edu.tr/"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.054316906760477,
+          40.987014672828984
+        ]
+      },
+      "properties": {
+        "name": "Mezunlar Ofisi",
+        "category": "İdari Binalar",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.051449308258526,
+          40.986001896298866
+        ]
+      },
+      "properties": {
+        "name": "Rektörlük (Göztepe Yerleşkesi)",
+        "category": "İdari Binalar",
+        "campus": "Göztepe Yerleşkesi",
+        "website": "https://www.marmara.edu.tr/universite/yonetim/rektorluk/"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.051697113769297,
+          40.98686935365192
+        ]
+      },
+      "properties": {
+        "name": "Uluslararası İlişkiler ve Akademik İşbirliği Ofisi",
+        "category": "İdari Binalar",
+        "campus": "Göztepe Yerleşkesi",
+        "website": "https://uluslararasi.marmara.edu.tr/"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.051566305031404,
+          40.98685806400535
+        ]
+      },
+      "properties": {
+        "name": "İbrahim Üzümcü Konferans Salonu",
+        "category": "Konferans Salonları",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.05402056,
+          40.98893891
+        ]
+      },
+      "properties": {
+        "name": "Hukuk ve İletişim Fakültesi Kütüphanesi",
+        "category": "Kütüphaneler",
+        "campus": "Göztepe Yerleşkesi",
+        "website": "https://kutuphane.marmara.edu.tr/idari/birim-kutuphaneler"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.05020543299678,
+          40.985755967967776
+        ]
+      },
+      "properties": {
+        "name": "Mescit (Göztepe Yerleşkesi)",
+        "category": "Mescit",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.05422511650643,
+          40.98976828942597
+        ]
+      },
+      "properties": {
+        "name": "Saliha Kulaksızoğlu Cami",
+        "category": "Mescit",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.0531738613885,
+          40.98819825927695
+        ]
+      },
+      "properties": {
+        "name": "Hayvanları Koruma Kulübü ( MÜHAK)",
+        "category": "Öğrenci Topluluk ve Takımları",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.054301061097604,
+          40.98515857641929
+        ]
+      },
+      "properties": {
+        "name": "Sivil Savunma Kulübü",
+        "category": "Öğrenci Topluluk ve Takımları",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.051693596956465,
+          40.98605855867504
+        ]
+      },
+      "properties": {
+        "name": "Otopark 1 (Göztepe Yerleşkesi)",
+        "category": "Otoparklar",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.050846018899108,
+          40.98606058339191
+        ]
+      },
+      "properties": {
+        "name": "Otopark 2 (Göztepe Yerleşkesi)",
+        "category": "Otoparklar",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.051591232419863,
+          40.98539090488741
+        ]
+      },
+      "properties": {
+        "name": "Personel Servis Noktası (Göztepe Yerleşkesi)",
+        "category": "Personel Servisleri",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.051285901187395,
+          40.985238543215395
+        ]
+      },
+      "properties": {
+        "name": "PTT Marmara Üniversitesi Şubesi (Göztepe Yerleşkesi)",
+        "category": "PTT",
+        "campus": "Göztepe Yerleşkesi",
+        "website": "www.ptt.gov.tr"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.052127750129195,
+          40.98515822264304
+        ]
+      },
+      "properties": {
+        "name": "Ring Servis Noktası (Göztepe Yerleşkesi)",
+        "category": "Ringler",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.051420419403225,
+          40.9852052619508
+        ]
+      },
+      "properties": {
+        "name": "Bisiklet Alanı (Göztepe Yerleşkesi)",
+        "category": "Spor Alanları",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.05289766754859,
+          40.98652427347988
+        ]
+      },
+      "properties": {
+        "name": "Fitness Salonu",
+        "category": "Spor Alanları",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.052948927030755,
+          40.98667200638021
+        ]
+      },
+      "properties": {
+        "name": "Şehit Ömer Halis DEMİR Spor Salonu",
+        "category": "Spor Alanları",
+        "campus": "Göztepe Yerleşkesi",
+        "website": "https://sks.marmara.edu.tr/"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.05173189208271,
+          40.98747894556628
+        ]
+      },
+      "properties": {
+        "name": "Spor Sahaları (Göztepe Yerleşkesi)",
+        "category": "Spor Alanları",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.053340303349568,
+          40.98756797766482
+        ]
+      },
+      "properties": {
+        "name": "V. Murat Av Köşkü Hamamı",
+        "category": "Yapıtlar",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.05368247492566,
+          40.98851835119719
+        ]
+      },
+      "properties": {
+        "name": "1453 Panorama (Göztepe Yerleşkesi)",
+        "category": "Yeme-İçme Alanları",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.054021093326895,
+          40.9876977423107
+        ]
+      },
+      "properties": {
+        "name": "Espresso Lab (Göztepe Yerleşkesi)",
+        "category": "Yeme-İçme Alanları",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.0531644062162,
+          40.985046715739855
+        ]
+      },
+      "properties": {
+        "name": "Kafe Bahçe (Göztepe Yerleşkesi)",
+        "category": "Yeme-İçme Alanları",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.049544289879833,
+          40.98570618484253
+        ]
+      },
+      "properties": {
+        "name": "Kafe Konuk Evi (Göztepe Yerleşkesi)",
+        "category": "Yeme-İçme Alanları",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.051693596956465,
+          40.98605855867504
+        ]
+      },
+      "properties": {
+        "name": "Öğrenci Yemekhanesi (Göztepe Yerleşkesi)",
+        "category": "Yeme-İçme Alanları",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.05327117500589,
+          40.98872076782931
+        ]
+      },
+      "properties": {
+        "name": "Selfiş Kafe (Göztepe Yerleşkesi)",
+        "category": "Yeme-İçme Alanları",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.052677139114753,
+          40.98509085921183
+        ]
+      },
+      "properties": {
+        "name": "Göztepe Yerleşkesi (A) Kapısı",
+        "category": "Yerleşke Girişleri",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.049699762516333,
+          40.98617137801391
+        ]
+      },
+      "properties": {
+        "name": "Göztepe Yerleşkesi (B) Kapısı",
+        "category": "Yerleşke Girişleri",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.054972294980605,
+          40.9891126770265
+        ]
+      },
+      "properties": {
+        "name": "Göztepe Yerleşkesi (C) Kapısı",
+        "category": "Yerleşke Girişleri",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.0528743,
+          40.986978
+        ]
+      },
+      "properties": {
+        "name": "Göztepe Yerleşkesi",
+        "category": "Yerleşkeler",
+        "campus": "Göztepe Yerleşkesi",
+        "website": "https://www.marmara.edu.tr"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.0495824785924,
+          40.9859534481431
+        ]
+      },
+      "properties": {
+        "name": "Konuk Evi (Göztepe Yerleşkesi)",
+        "category": "Yurt ve Misafirhaneler",
+        "campus": "Göztepe Yerleşkesi",
+        "website": "https://sosyaltesis.marmara.edu.tr/"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.053554077397717,
+          40.986739646800814
+        ]
+      },
+      "properties": {
+        "name": "Afet Konteynerleri",
+        "category": "Diğer",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.050257780076883,
+          40.986614160713266
+        ]
+      },
+      "properties": {
+        "name": "Atık Toplama Alanı (Göztepe Yerleşkesi)",
+        "category": "Diğer",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.05012422418561,
+          40.98618316299721
+        ]
+      },
+      "properties": {
+        "name": "Çamaşırhane (Göztepe Yerleşkesi)",
+        "category": "Diğer",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.051090302171957,
+          40.98533554685959
+        ]
+      },
+      "properties": {
+        "name": "Polis Noktası 1 (Göztepe Yerleşkesi)",
+        "category": "Diğer",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.050049810633286,
+          40.98623787285608
+        ]
+      },
+      "properties": {
+        "name": "Polis Noktası 2 (Göztepe Yerleşkesi)",
+        "category": "Diğer",
+        "campus": "Göztepe Yerleşkesi",
+        "website": null
+      }
+    }
+  ]
+}

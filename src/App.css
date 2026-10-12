@@ -125,3 +125,132 @@
     bottom: 16px;
   }
 }
+/* Seçilen bina bilgi kartı */
+
+.building-card {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  z-index: 20;
+
+  transform: translateX(-50%);
+
+  width: min(420px, calc(100% - 32px));
+  max-height: 55dvh;
+  overflow-y: auto;
+
+  padding: 24px;
+
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 22px;
+
+  box-shadow: 0 12px 50px rgba(0, 0, 0, 0.14);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.card-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  width: 36px;
+  height: 36px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #f1eef7;
+  color: #66538e;
+
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.card-label {
+  margin-bottom: 12px;
+  color: #7952cc;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.building-card h2 {
+  margin: 0 30px 12px 0;
+
+  font-size: 22px;
+  font-weight: 650;
+  line-height: 1.3;
+  color: #242424;
+}
+
+.card-description {
+  margin: 0 0 16px;
+  color: #777;
+  font-size: 13px;
+}
+
+.unit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.unit-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  padding: 12px 14px;
+
+  background: #f7f5fb;
+  border-radius: 12px;
+}
+
+.unit-category {
+  color: #7952cc;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.unit-item strong {
+  color: #333;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.unit-item a {
+  align-self: flex-start;
+
+  margin-top: 4px;
+  color: #7952cc;
+
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.unit-item a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .building-card {
+    bottom: 0;
+    width: 100%;
+    max-height: 60dvh;
+
+    padding: 24px 20px;
+
+    border-radius: 24px 24px 0 0;
+  }
+
+  .map-status {
+    bottom: 16px;
+  }
+
+  .building-card ~ .map-status {
+    display: none;
+  }
+}
