@@ -111,16 +111,18 @@ function App() {
     async function loadBuildings() {
       try {
         const [
-          buildingsResponse,
-          boundaryResponse,
-          rawResponse,
-          poisResponse,
-        ] = await Promise.all([
-          fetch('/data/goztepe-buildings-3d.geojson'),
-          fetch('/data/goztepe-boundary.geojson'),
-          fetch('/data/goztepe-buildings-raw.geojson'),
-          fetch('/data/goztepe-poi.geojson'),
-        ])
+  buildingsResponse,
+  boundaryResponse,
+  rawResponse,
+  poisResponse,
+  overridesResponse,
+] = await Promise.all([
+  fetch('/data/goztepe-buildings-3d.geojson'),
+  fetch('/data/goztepe-boundary.geojson'),
+  fetch('/data/goztepe-buildings-raw.geojson'),
+  fetch('/data/goztepe-poi.geojson'),
+  fetch('/data/building-overrides.json'),
+])
 
         if (
           !buildingsResponse.ok ||

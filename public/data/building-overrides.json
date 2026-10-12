@@ -1,0 +1,404 @@
+{
+  "version": 1,
+  "project": "goztepe-campus-map",
+  "updatedAt": "2026-10-12T17:13:14.333Z",
+  "buildings": {
+    "osm:relation/13762143": {
+      "name": "Atatürk Eğitim Fakültesi",
+      "units": [
+        {
+          "name": "Doğa Bitkileri ve Su Ürünleri Araştırma ve Uygulama Merkezi (DOBİSU)",
+          "category": "Araştırma ve Uygulama Merkezleri",
+          "website": null
+        }
+      ],
+      "status": "uncertain"
+    },
+    "osm:way/1020362430": {
+      "name": "A Kapısı",
+      "units": [],
+      "status": "verified"
+    },
+    "osm:way/887797390": {
+      "name": "Cafe Bahçe",
+      "units": [],
+      "status": "uncertain"
+    },
+    "osm:way/1020362396": {
+      "name": "İŞKUR Merkezi",
+      "units": [
+        {
+          "name": "İşkur Merkezi",
+          "category": "Diğer",
+          "website": null
+        }
+      ],
+      "status": "verified"
+    },
+    "osm:way/887797389": {
+      "name": "Teknoloji Fakültesi",
+      "units": [
+        {
+          "name": "Döner Sermaye İşletme Müdürlüğü",
+          "category": "İdari Binalar",
+          "website": null
+        },
+        {
+          "name": "Sürekli Eğitim Merkezi ( MÜSEM )",
+          "category": "İdari Binalar",
+          "website": null
+        },
+        {
+          "name": "Teknoloji Fakültesi Fotokopi Merkezi",
+          "category": "Alışveriş Mekanları",
+          "website": null
+        }
+      ],
+      "status": "uncertain"
+    },
+    "osm:way/887797374": {
+      "name": "Nanoteknoloji ve Biyomalzemeler Uygulama ve Araştırma Merkezi (NBUAM)",
+      "units": [
+        {
+          "name": "Nanoteknoloji ve Biyomalzemeler Uygulama ve Araştırma Merkezi (NBUAM)",
+          "category": "Araştırma ve Uygulama Merkezleri",
+          "website": "https://nbuam.marmara.edu.tr/"
+        },
+        {
+          "name": "Teknoloji Fakültesi Kantini",
+          "category": "Yeme-İçme Alanları",
+          "website": null
+        }
+      ],
+      "status": "uncertain"
+    },
+    "osm:way/887797372": {
+      "name": "Teknik Bilimler Meslek Yüksekokulu Atölye ve Laboratuvarları",
+      "units": [
+        {
+          "name": "Teknik Bilimler Meslek Yüksekokulu Atölye ve Laboratuvarları",
+          "category": "Diğer Laboratuvarlar",
+          "website": "https://tbmyo.marmara.edu.tr/"
+        },
+        {
+          "name": "Uygulamalı Bilimler Yüksek Okulu Atölye ve Laboratuvarları",
+          "category": "Diğer Laboratuvarlar",
+          "website": "https://ubyo.marmara.edu.tr/"
+        }
+      ],
+      "status": "uncertain"
+    },
+    "osm:way/887797371": {
+      "name": "İst.Teks.Arş. AR-GE ve İnnovasyon Merkezi",
+      "units": [
+        {
+          "name": "İst.Teks.Arş. AR-GE ve İnnovasyon Merkezi",
+          "category": "İdari Binalar",
+          "website": null
+        }
+      ],
+      "status": "uncertain"
+    },
+    "osm:way/277722699": {
+      "name": "Fen-Edebiyat Fakültesi",
+      "units": [
+        {
+          "name": "İş Sağlığı ve Güvenliği (Göztepe Yerleşkesi)",
+          "category": "İdari Binalar",
+          "website": "https://isg.marmara.edu.tr/"
+        },
+        {
+          "name": "Kariyer Merkezi",
+          "category": "İdari Binalar",
+          "website": null
+        },
+        {
+          "name": "Fen Fakültesi & İnsan ve Toplum Bilimleri Fakültesi Kantini",
+          "category": "Yeme-İçme Alanları",
+          "website": null
+        },
+        {
+          "name": "Mezunlar Ofisi",
+          "category": "İdari Binalar",
+          "website": null
+        }
+      ],
+      "status": "uncertain"
+    },
+    "osm:way/887797370": {
+      "name": "Amfi",
+      "units": [
+        {
+          "name": "125. Yıl Amfisi",
+          "category": "Konferans Salonları",
+          "website": null
+        }
+      ],
+      "status": "verified"
+    },
+    "osm:way/887797368": {
+      "name": "Atatürk Eğitim Fakültesi Hikmet Savcı Binası D Blok",
+      "units": [
+        {
+          "name": "Personel Yemekhanesi (Göztepe Yerleşkesi)",
+          "category": "Yeme-İçme Alanları",
+          "website": null
+        }
+      ],
+      "status": "uncertain"
+    },
+    "osm:way/887797362": {
+      "name": "Handan Ertuğrul Kız Öğrenci Yurdu",
+      "units": [
+        {
+          "name": "Handan Ertuğrul Kız Öğrenci Yurdu",
+          "category": "Yurt ve Misafirhaneler",
+          "website": null
+        }
+      ],
+      "status": "verified"
+    },
+    "osm:way/887797366": {
+      "name": "Teknopark AŞ (Göztepe Yerleşkesi)",
+      "units": [
+        {
+          "name": "Teknopark AŞ (Göztepe Yerleşkesi)",
+          "category": "Teknokent",
+          "website": null
+        },
+        {
+          "name": "Workrunner Bilişim Teknolojileri Derslikleri",
+          "category": "Derslikler",
+          "website": null
+        }
+      ],
+      "status": "uncertain"
+    },
+    "osm:relation/14041973": {
+      "name": "Hukuk Fakültesi",
+      "units": [
+        {
+          "name": "Hukuk Fakültesi",
+          "category": "Akademik Binalar",
+          "website": "https://hukuk.marmara.edu.tr/"
+        },
+        {
+          "name": "Hukuk Fakültesi Fotokopi Merkezi",
+          "category": "Alışveriş Mekanları",
+          "website": null
+        },
+        {
+          "name": "Adalet Meslek Yüksekokulu Derslikleri",
+          "category": "Derslikler",
+          "website": null
+        },
+        {
+          "name": "Adalet Meslek Yüksekokulu",
+          "category": "Akademik Binalar",
+          "website": "https://adalet.marmara.edu.tr/"
+        },
+        {
+          "name": "Hukuk ve İletişim Fakültesi Kütüphanesi",
+          "category": "Kütüphaneler",
+          "website": "https://kutuphane.marmara.edu.tr/idari/birim-kutuphaneler"
+        },
+        {
+          "name": "Teras Kafe/Restoran (Göztepe Yerleşkesi)",
+          "category": "Yeme-İçme Alanları",
+          "website": null
+        },
+        {
+          "name": "Film Tasarımı ve Yönetimi Bölümü",
+          "category": "Akademik Binalar",
+          "website": "http://stv.gsf.marmara.edu.tr/"
+        },
+        {
+          "name": "Selfiş Kafe (Göztepe Yerleşkesi)",
+          "category": "Yeme-İçme Alanları",
+          "website": null
+        },
+        {
+          "name": "İletişim Fakültesi",
+          "category": "Akademik Binalar",
+          "website": "https://iletisim.marmara.edu.tr/"
+        },
+        {
+          "name": "Kurumsal İletişim Koordinatörlüğü",
+          "category": "İdari Binalar",
+          "website": null
+        }
+      ],
+      "status": "uncertain"
+    },
+    "osm:way/277722513": {
+      "name": "Yemekhane",
+      "units": [
+        {
+          "name": "Uzaktan Eğitim Merkezi ( UZEM )",
+          "category": "İdari Binalar",
+          "website": null
+        },
+        {
+          "name": "Öğrenci Yemekhanesi (Göztepe Yerleşkesi)",
+          "category": "Yeme-İçme Alanları",
+          "website": null
+        }
+      ],
+      "status": "uncertain"
+    },
+    "osm:way/277722858": {
+      "name": "Marmara Üniversitesi Mühendislik C Binası",
+      "units": [
+        {
+          "name": "Psikolojik Danışma ve Rehberlik Uygulama Merkezi - MARPAM",
+          "category": "Araştırma ve Uygulama Merkezleri",
+          "website": "https://marpam.marmara.edu.tr/"
+        }
+      ],
+      "status": "uncertain"
+    },
+    "osm:way/887797357": {
+      "name": "Marmara Simit Kantin (Göztepe Yerleşkesi)",
+      "units": [
+        {
+          "name": "Marmara Simit Kantin (Göztepe Yerleşkesi)",
+          "category": "Yeme-İçme Alanları",
+          "website": null
+        }
+      ],
+      "status": "uncertain"
+    },
+    "osm:way/1020362386": {
+      "name": "Çarşı Alanı Fotokopi Merkezi (Göztepe Yerleşkesi)",
+      "units": [
+        {
+          "name": "Çarşı Alanı Fotokopi Merkezi (Göztepe Yerleşkesi)",
+          "category": "Alışveriş Mekanları",
+          "website": null
+        },
+        {
+          "name": "Erkek Kuaförü (Göztepe Yerleşkesi)",
+          "category": "Alışveriş Mekanları",
+          "website": null
+        },
+        {
+          "name": "Kadın Kuaförü (Göztepe Yerleşkesi)",
+          "category": "Alışveriş Mekanları",
+          "website": null
+        },
+        {
+          "name": "Acil Durum Merkezi (Göztepe Yerleşkesi)",
+          "category": "İdari Binalar",
+          "website": null
+        },
+        {
+          "name": "Kampüs Amirliği (Göztepe Yerleşkesi)",
+          "category": "İdari Binalar",
+          "website": null
+        },
+        {
+          "name": "Hediyelik Eşya Mağazası (Göztepe Yerleşkesi)",
+          "category": "Alışveriş Mekanları",
+          "website": null
+        }
+      ],
+      "status": "uncertain"
+    },
+    "osm:relation/14041972": {
+      "name": "İbrahim Üzümcü Konferans Salonu",
+      "units": [
+        {
+          "name": "Bilimsel Araştırma Projeleri Birimi ( BAPKO )",
+          "category": "İdari Binalar",
+          "website": "https://bapko.marmara.edu.tr/"
+        },
+        {
+          "name": "İnovasyon ve Teknoloji Transfer Uyg. ve Arş. Merkezi (MİTTO)",
+          "category": "İdari Binalar",
+          "website": "https://mitto.marmara.edu.tr/"
+        }
+      ],
+      "status": "uncertain"
+    },
+    "osm:way/277723368": {
+      "name": "Yabancı Diller Bölümü",
+      "units": [
+        {
+          "name": "Altıgen Kafe (Göztepe Yerleşkesi)",
+          "category": "Yeme-İçme Alanları",
+          "website": null
+        }
+      ],
+      "status": "uncertain"
+    },
+    "osm:way/887797345": {
+      "name": "Özmen Aktar Kız Öğrenci Yurdu",
+      "units": [
+        {
+          "name": "Özmen Aktar Kız Öğrenci Yurdu",
+          "category": "Yurt ve Misafirhaneler",
+          "website": "https://www.marmara.edu.tr/"
+        }
+      ],
+      "status": "verified"
+    },
+    "osm:way/887797343": {
+      "name": "Enstitüler Binası",
+      "units": [
+        {
+          "name": "Enstitüler Binası",
+          "category": "Akademik Binalar",
+          "website": null
+        },
+        {
+          "name": "Hukuk Müşavirliği",
+          "category": "İdari Binalar",
+          "website": null
+        },
+        {
+          "name": "Kalite Koordinatörlüğü",
+          "category": "İdari Binalar",
+          "website": "https://kalite.marmara.edu.tr/"
+        },
+        {
+          "name": "Yazı İşleri ve Arşiv Şube Müdürlüğü",
+          "category": "İdari Binalar",
+          "website": "https://yiasm.marmara.edu.tr/"
+        }
+      ],
+      "status": "uncertain"
+    },
+    "osm:way/1020362428": {
+      "name": "Konukevi",
+      "units": [
+        {
+          "name": "Kafe Konuk Evi (Göztepe Yerleşkesi)",
+          "category": "Yeme-İçme Alanları",
+          "website": null
+        },
+        {
+          "name": "Konuk Evi (Göztepe Yerleşkesi)",
+          "category": "Yurt ve Misafirhaneler",
+          "website": "https://sosyaltesis.marmara.edu.tr/"
+        }
+      ],
+      "status": "uncertain"
+    },
+    "osm:way/1020362439": {
+      "name": "B Kapısı",
+      "units": [
+        {
+          "name": "Göztepe Yerleşkesi (B) Kapısı",
+          "category": "Yerleşke Girişleri",
+          "website": null
+        }
+      ],
+      "status": "verified"
+    },
+    "osm:way/887797365": {
+      "name": "Henüz isimlendirilmemiş bina",
+      "units": [],
+      "status": "unreviewed"
+    }
+  }
+}
