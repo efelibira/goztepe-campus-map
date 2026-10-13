@@ -125,6 +125,39 @@
     bottom: 16px;
   }
 }
+.map-mode-switch {
+  position: absolute;
+  z-index: 32;
+  top: 78px;
+  right: 24px;
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 5px 22px rgba(0, 0, 0, 0.09);
+  backdrop-filter: blur(14px);
+}
+
+.map-mode-button {
+  min-height: 38px;
+  padding: 8px 13px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #53616a;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.map-mode-button.active {
+  background: #e7f1f8;
+  color: #185d87;
+}
+
 /* Seçilen bina bilgi kartı */
 
 .building-card {
@@ -478,6 +511,17 @@
     left: 16px;
     right: auto;
     flex-wrap: wrap;
+  }
+
+  .map-mode-switch {
+    top: 74px;
+    right: 16px;
+  }
+
+  .map-mode-button {
+    min-height: 36px;
+    padding: 7px 10px;
+    font-size: 12px;
   }
 
   .editor-panel {

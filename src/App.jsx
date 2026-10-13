@@ -106,6 +106,8 @@ function App() {
   const overridesRef = useRef(loadOverrides())
 
   const [editMode, setEditMode] = useState(false)
+  const [mapMode, setMapMode] = useState('3d')
+  const mapModeRef = useRef('3d')
   const [selectedBuilding, setSelectedBuilding] = useState(null)
   const [buildingCount, setBuildingCount] = useState(null)
   const [buildingFeatures, setBuildingFeatures] = useState([])
@@ -191,7 +193,8 @@ function App() {
         padding: { top: 110, right: 90, bottom: 90, left: Math.min(380, window.innerWidth * .28) },
         duration: CAMERA_ANIMATION_DURATION,
         maxZoom: 18,
-        pitch: 35,
+        pitch: mapModeRef.current === '3d' ? 35 : 0,
+        bearing: mapModeRef.current === '3d' ? map.getBearing() : 0,
       })
     } catch (err) {
       clearRoute()
@@ -241,7 +244,8 @@ function App() {
         map.flyTo({
           center,
           zoom: Math.max(map.getZoom(), BUILDING_CAMERA.minZoom),
-          pitch: BUILDING_CAMERA.pitch,
+          pitch: mapModeRef.current === '3d' ? BUILDING_CAMERA.pitch : 0,
+          bearing: mapModeRef.current === '3d' ? map.getBearing() : 0,
           essential: true,
           duration: CAMERA_ANIMATION_DURATION,
         })
@@ -421,10 +425,34 @@ const map = new MapLibreMap({
           )
         }
 
+        map.addLayer({
+          id: 'outside-buildings-2d',
+          type: 'fill',
+          source: 'outside-buildings',
+          layout: { visibility: 'none' },
+          paint: {
+            'fill-color': campusColors.surroundings,
+            'fill-opacity': 0.92,
+            'fill-outline-color': '#aeb5b7',
+          },
+        })
+
         map.addSource('campus-buildings', {
           type: 'geojson',
           data,
           promoteId: 'buildingKey',
+        })
+
+        map.addLayer({
+          id: 'campus-building-2d',
+          type: 'fill',
+          source: 'campus-buildings',
+          layout: { visibility: 'none' },
+          paint: {
+            'fill-color': campusColors.building,
+            'fill-opacity': 0.96,
+            'fill-outline-color': '#5b87aa',
+          },
         })
 
         map.addLayer({
@@ -448,6 +476,19 @@ const map = new MapLibreMap({
             'fill-extrusion-vertical-gradient': true,
           },
         })
+
+        // Kullanıcı veri yüklenirken görünümü değiştirmiş olabilir.
+        const initial3d = mapModeRef.current === '3d'
+        for (const [layerId, visible] of [
+          ['campus-building-fill', initial3d],
+          ['campus-building-2d', !initial3d],
+          ['outside-buildings-3d', initial3d],
+          ['outside-buildings-2d', !initial3d],
+        ]) {
+          if (map.getLayer(layerId)) {
+            map.setLayoutProperty(layerId, 'visibility', visible ? 'visible' : 'none')
+          }
+        }
 
         // Kullanıcı rota isteyene kadar katmanlar boş kalır.
         const emptyRoutes = { type: 'FeatureCollection', features: [] }
@@ -482,16 +523,18 @@ const map = new MapLibreMap({
           )
         }
 
-        map.on('click', 'campus-building-fill', (event) => {
-          const feature = event.features?.[0]
-          if (!feature) return
+        for (const layerId of ['campus-building-fill', 'campus-building-2d']) {
+          map.on('click', layerId, (event) => {
+            const feature = event.features?.[0]
+            if (!feature) return
 
-          selectBuilding(feature.id, true)
-        })
+            selectBuilding(feature.id, true)
+          })
+        }
 
         map.on('click', (event) => {
           const buildings = map.queryRenderedFeatures(event.point, {
-            layers: ['campus-building-fill'],
+            layers: ['campus-building-fill', 'campus-building-2d'],
           })
 
           if (buildings.length === 0) {
@@ -499,13 +542,15 @@ const map = new MapLibreMap({
           }
         })
 
-        map.on('mouseenter', 'campus-building-fill', () => {
-          map.getCanvas().style.cursor = 'pointer'
-        })
+        for (const layerId of ['campus-building-fill', 'campus-building-2d']) {
+          map.on('mouseenter', layerId, () => {
+            map.getCanvas().style.cursor = 'pointer'
+          })
 
-        map.on('mouseleave', 'campus-building-fill', () => {
-          map.getCanvas().style.cursor = ''
-        })
+          map.on('mouseleave', layerId, () => {
+            map.getCanvas().style.cursor = ''
+          })
+        }
 
         setBuildingFeatures(features)
         setBuildingCount(features.length)
@@ -574,11 +619,21 @@ const map = new MapLibreMap({
           campusColors.building,
         ]
 
-    map.setPaintProperty(
-      'campus-building-fill',
-      'fill-extrusion-color',
-      colorExpression
-    )
+    if (map.getLayer('campus-building-fill')) {
+      map.setPaintProperty(
+        'campus-building-fill',
+        'fill-extrusion-color',
+        colorExpression
+      )
+    }
+
+    if (map.getLayer('campus-building-2d')) {
+      map.setPaintProperty(
+        'campus-building-2d',
+        'fill-color',
+        colorExpression
+      )
+    }
   }, [editMode, buildingFeatures])
 
   useEffect(() => {
@@ -611,10 +666,11 @@ const map = new MapLibreMap({
     clearRoute()
     // Kamera geri dönüşü v0.9.3
     mapRef.current?.flyTo({
-        ...HOME_CAMERA,
-        
-        duration: CAMERA_ANIMATION_DURATION,
-      })
+      ...HOME_CAMERA,
+      pitch: mapModeRef.current === '3d' ? HOME_CAMERA.pitch : 0,
+      bearing: mapModeRef.current === '3d' ? HOME_CAMERA.bearing : 0,
+      duration: CAMERA_ANIMATION_DURATION,
+    })
 
 
     const map = mapRef.current
@@ -639,6 +695,36 @@ const map = new MapLibreMap({
   function toggleEditMode() {
     closeCard()
     setEditMode((previous) => !previous)
+  }
+
+  function changeMapMode(nextMode) {
+    if (nextMode === mapModeRef.current) return
+
+    mapModeRef.current = nextMode
+    setMapMode(nextMode)
+
+    const map = mapRef.current
+    if (!map) return
+
+    const is3d = nextMode === '3d'
+    const visibility = (visible) => (visible ? 'visible' : 'none')
+
+    for (const [layerId, visible] of [
+      ['campus-building-fill', is3d],
+      ['campus-building-2d', !is3d],
+      ['outside-buildings-3d', is3d],
+      ['outside-buildings-2d', !is3d],
+    ]) {
+      if (map.getLayer(layerId)) {
+        map.setLayoutProperty(layerId, 'visibility', visibility(visible))
+      }
+    }
+
+    map.easeTo({
+      pitch: is3d ? HOME_CAMERA.pitch : 0,
+      bearing: is3d ? HOME_CAMERA.bearing : 0,
+      duration: CAMERA_ANIMATION_DURATION,
+    })
   }
 
   function saveBuilding(id, changes) {
@@ -721,6 +807,25 @@ const map = new MapLibreMap({
           <p>Marmara Üniversitesi</p>
         </div>
       </header>
+
+      <div className="map-mode-switch" role="group" aria-label="Harita görünümü">
+        <button
+          type="button"
+          className={mapMode === '2d' ? 'map-mode-button active' : 'map-mode-button'}
+          aria-pressed={mapMode === '2d'}
+          onClick={() => changeMapMode('2d')}
+        >
+          2D harita
+        </button>
+        <button
+          type="button"
+          className={mapMode === '3d' ? 'map-mode-button active' : 'map-mode-button'}
+          aria-pressed={mapMode === '3d'}
+          onClick={() => changeMapMode('3d')}
+        >
+          3D maket
+        </button>
+      </div>
 
       <SearchPanel
         buildings={searchableBuildings}
